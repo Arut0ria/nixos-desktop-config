@@ -13,7 +13,12 @@
   # Enabling flakes
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
+  boot.supportedFilesystems = [ "btrfs" ];
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
+
   # Use the systemd-boot EFI boot loader.
+  boot.initrd.systemd.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
