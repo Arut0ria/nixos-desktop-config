@@ -3,10 +3,22 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vdb";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
+            XBOOT = {
+              size = "1G";
+              type = "EA00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot/efi";
+                mountOptions = [
+                  "defaults"
+                ];
+              };
+            };
             ESP = {
               size = "512M";
               type = "EF00";
@@ -28,9 +40,9 @@
                 #passwordFile = "/tmp/secret.key"; # Interactive
                 settings = {
                   allowDiscards = true;
-                  keyFile = "/tmp/secret.key";
+                  # keyFile = "/tmp/secret.key";
                 };
-                additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
+                # additionalKeyFiles = [ "/tmp/additionalSecret.key" ];
                 content = {
                   type = "btrfs";
                   extraArgs = [ "-f" ];
@@ -49,7 +61,7 @@
                     };
                     "/swap" = {
                       mountpoint = "/.swapvol";
-                      swap.swapfile.size = "20M";
+                      swap.swapfile.size = "1G";
                     };
                   };
                 };
