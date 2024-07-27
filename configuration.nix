@@ -39,11 +39,11 @@
 
   # Enable kde
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager = {
-    plasma6.enable = true;
+  services.displayManager = {
     defaultSession = "plasma";
+    sddm.enable = true;
   };
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "fr";
@@ -76,7 +76,7 @@
   users.users.theo = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs [
+    packages = with pkgs; [
       firefox
     ];
   };
