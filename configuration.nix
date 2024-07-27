@@ -21,6 +21,7 @@
   boot.initrd.systemd.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   # Pick only one of the below networking options.
