@@ -14,6 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
+                extraArgs = [ "-n boot" ];
                 mountOptions = [
                   "defaults"
                 ];
@@ -26,6 +27,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/efi";
+                extraArgs = [ "-n ESP-1" ];
                 mountOptions = [
                   "defaults"
                 ];

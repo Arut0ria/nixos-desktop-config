@@ -13,9 +13,17 @@
   # Enabling flakes
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
-  boot.supportedFilesystems = [ "btrfs" ];
+  boot.supportedFilesystems = [ "btrfs" "vfat" ];
   hardware.enableAllFirmware = true;
   nixpkgs.config.allowUnfree = true;
+
+  # Configurer le déchiffrement LUKS
+  boot.initrd.luks.devices = {
+    crypted = {
+      device = "/dev/disk/by-uuid/4dec0956-f8d1-4b45-b2ca-0d08f7e1c0db";
+      preLVM = true;
+    };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.initrd.systemd.enable = true;
