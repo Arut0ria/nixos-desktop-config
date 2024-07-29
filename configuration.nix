@@ -13,24 +13,25 @@
   # Enabling flakes
   nix.settings.experimental-features = [ "nix-command flakes" ];
 
-  boot.supportedFilesystems = [ "btrfs" "vfat" ];
-  hardware.enableAllFirmware = true;
-  nixpkgs.config.allowUnfree = true;
+  # Boot setup
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    supportedFilesystems = [ "btrfs" "vfat" ];
+    initrd.systemd.enable = true;
+    
+    loader = {
+      systemd-boot.enable = true;
+      systemd-boot.xbootldrMountPoint = "/boot";
 
-  # Configurer le déchiffrement LUKS
-  boot.initrd.luks.devices = {
-    crypted = {
-      device = "/dev/disk/by-uuid/4dec0956-f8d1-4b45-b2ca-0d08f7e1c0db";
-      preLVM = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/efi";
+      };
     };
   };
-
-  # Use the systemd-boot EFI boot loader.
-  boot.initrd.systemd.enable = true;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/efi";
-  boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
+  
+  hardware.enableAllFirmware = true;
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -40,10 +41,6 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Select internationalisation properties.
   i18n.defaultLocale = "fr_FR.UTF-8";
   console = {
@@ -51,21 +48,20 @@
     keyMap = "fr";
     # useXkbConfig = true; # use xkb.options in tty.
   };
-
-  # Enable kde
-  services.xserver.enable = true;
-  services.displayManager = {
-    defaultSession = "plasma";
-    sddm.enable = true;
+  
+  # Services
+  services = {
+    xserver.enable = true;
+    displayManager = {
+      defaultSession = "plasma";
+      sddm.enable = true;
+    };
+    desktopManager.plasma6.enable = true;
+    
+    xserver.xkb.layout = "fr";
+    xserver.xkb.options = "eurosign:e,caps:escape";
+    openssh.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "fr";
-  services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable sound.
   # hardware.pulseaudio.enable = true;
@@ -78,16 +74,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     firefox
-  #     tree
-  #   ];
-  # };
-
+  # Users
   users.users.theo = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -111,11 +98,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
