@@ -20,13 +20,30 @@
     supportedFilesystems = [ "btrfs" "vfat" ];
     initrd.systemd.enable = true;
     
+    /*
+    initrd.luks.devices = {
+      crypted = {
+        device = "/dev/disk/by-uuid/e7076131-b2bd-42a8-9858-341f83cb11b0";
+        preLVM = true;
+      };
+    };
+    */
+    
     loader = {
-      systemd-boot.enable = true;
-      systemd-boot.xbootldrMountPoint = "/boot";
+      # systemd-boot.enable = true;
+      # systemd-boot.xbootldrMountPoint = "/boot";
+
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        enableCryptodisk = true;
+        useOSProber = true;
+      };
 
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
+        # efiSysMountPoint = "/efi";
       };
     };
   };

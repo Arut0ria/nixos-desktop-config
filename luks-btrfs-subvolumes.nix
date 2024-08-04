@@ -7,6 +7,7 @@
         content = {
           type = "gpt";
           partitions = {
+            /*
             XBOOT = {
               size = "1G";
               type = "EA00";
@@ -20,13 +21,15 @@
                 ];
               };
             };
+            */
             ESP = {
-              size = "512M";
+              size = "1G";
               type = "EF00";
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/efi";
+                # mountpoint = "/efi";
+                mountpoint = "/boot";
                 extraArgs = [ "-n ESP-1" ];
                 mountOptions = [
                   "defaults"
