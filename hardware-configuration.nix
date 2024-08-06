@@ -18,6 +18,16 @@
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s3.useDHCP = lib.mkDefault true;
 
+  hardware.opengl.enable = true;
+
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false;
+    nvidiaSetting = true;
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # virtualisation.virtualbox.guest.enable = true;
 }

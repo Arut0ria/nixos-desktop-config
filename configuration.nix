@@ -2,13 +2,14 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./luks-btrfs-subvolumes.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
 
   # Enabling flakes
@@ -78,6 +79,7 @@
     
     xserver.xkb.layout = "fr";
     xserver.xkb.options = "eurosign:e,caps:escape";
+    xserver.videoDrivers = [ "nvidia" ];
     openssh.enable = true;
   };
 
@@ -92,23 +94,51 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  programs.zsh.enable = true;
+
   # Users
+  users.defaultUserShell = pkgs.zsh;
   users.users.theo = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
-      firefox
+      # firefox
     ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    git
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     kitty
-    home-manager
+    zsh
   ];
+
+  # Home manager setup
+  home-manager = {
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users.theo = import ./home.nix;
+  };
+
+  # Enable stylix
+  stylix = {
+    enable = true;
+    autoEnable = true;
+    image = pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/672183.jpg";
+      sha256 = "0g0z89miryai32w51q2is7p18pwg1mx6jcagjxbaiaamf35hx4wa";
+    };
+    polarity = "dark";
+    opacity.terminal = 0.9;
+    targets = {
+      grub.useImage = true;
+      # kitty.enable = true;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -147,6 +177,5 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 

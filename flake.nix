@@ -6,12 +6,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    /*
-    home-mananger = {
-      url = "github:nix-community/home-manager";
+    stylix = {
+      url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    */
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-24.05";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
@@ -21,19 +24,14 @@
   in {
     nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
       inherit system;
+      specialArgs = {
+        inherit inputs system;
+      };
       modules = [
         ./configuration.nix
         inputs.disko.nixosModules.disko
+        inputs.stylix.nixosModules.stylix
       ];
     };
-
-      /*
-      homeConfigurations.theo = home-manager.lib.homeManagerConfiguration {
-       inherit pkgs;
-       modules = [
-         ./home.nix
-       ];
-      };
-      */
   };
 }
