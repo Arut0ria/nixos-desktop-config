@@ -5,7 +5,7 @@
     [
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.home-manager
-      home-manager.nix
+      ./home-manager.nix
     ];
 
   # Enabling flakes
@@ -39,10 +39,13 @@
   networking.networkmanager.enable = true;
 
   # Users
+  programs.zsh.enable = true;
   users.users.theo = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [];
+
+    shell = pkgs.zsh;
   };
 
   environment.systemPackages = with pkgs; [

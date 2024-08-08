@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }: {
   options = {
-    locale-module = lib.mkEnableOption "Enables french locale";
+    locale-module.enable = lib.mkEnableOption "Enables french locale";
   };
 
   config = lib.mkIf config.locale-module.enable {

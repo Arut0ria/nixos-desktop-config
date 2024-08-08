@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }: {
   options = {
-    plasma-module = lib.mkEnableOption "Enables plasma";
+    plasma-module.enable = lib.mkEnableOption "Enables plasma";
   };
 
   config = lib.mkIf config.plasma-module.enable {

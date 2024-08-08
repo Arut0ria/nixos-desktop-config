@@ -2,7 +2,7 @@
   imports = [
     ./services/nvidia.nix
     ./services/pipewire.nix
-    ./sercices/plasma.nix
+    ./services/plasma.nix
     ./services/ssh.nix
     ./services/locale.nix
 

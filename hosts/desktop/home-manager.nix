@@ -1,12 +1,13 @@
-{ inputs, ... }: {
+{ inputs, pkgs, lib, config, ... }: {
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      theo = import ./home.nix;
-      modules = [
-        ./home.nix
-        inputs.self.outputs.homeManagerModules.default
-      ];
+      theo = {
+        imports = [
+          ./home.nix
+          inputs.self.outputs.homeManagerModules.default
+        ];
+      };
     };
   };
 }
