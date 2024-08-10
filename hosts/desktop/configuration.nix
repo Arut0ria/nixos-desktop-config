@@ -43,7 +43,7 @@
   users.users.theo = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
 
     shell = pkgs.zsh;
   };
@@ -52,6 +52,8 @@
     git
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    nixpkgs-fmt
+    vlc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
