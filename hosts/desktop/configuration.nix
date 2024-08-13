@@ -54,6 +54,7 @@
     wget
     nixpkgs-fmt
     vlc
+    blender
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

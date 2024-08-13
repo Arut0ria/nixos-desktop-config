@@ -13,10 +13,16 @@
         sha256 = "0g0z89miryai32w51q2is7p18pwg1mx6jcagjxbaiaamf35hx4wa";
       };
       polarity = "dark";
-      # opacity.terminal = 0.1;
+      opacity = {
+        terminal = 0.9;
+        popups = 0.9;
+        applications = 0.95;
+        desktop = 0.9;
+      };
       targets = {
         grub.useImage = true;
       };
+      override.base05 = "FFFFFF";
     };
   };
 }

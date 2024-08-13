@@ -5,7 +5,7 @@
     #  url = "github:nix-community/disko";
     #  inputs.nixpkgs.follows = "nixpkgs";
     # };
-    
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,26 +15,41 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, ... }:
-  let
-    system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
-      inherit system;
-      specialArgs = {
-        inherit inputs system;
-      };
-      
-      modules = [
-        ./hosts/desktop/configuration.nix
-        ./nixosModules
-        inputs.stylix.nixosModules.stylix
-      ];
-    };
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+        };
 
-    homeManagerModules.default = ./homeManagerModules;
-  };
+        modules = [
+          ./hosts/desktop/configuration.nix
+          ./nixosModules
+          inputs.stylix.nixosModules.stylix
+        ];
+      };
+
+      inputs.home-manager = {
+        useUserPackages = true;
+        useGlobalPkgs = true;
+        sharedModules = [
+          inputs.plasma-manager.homeManagerModules.plasma-manager
+        ];
+      };
+
+      homeManagerModules.default = ./homeManagerModules;
+    };
 }
