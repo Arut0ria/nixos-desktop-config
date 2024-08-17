@@ -4,6 +4,7 @@
     ./programs/zsh.nix
     ./programs/vscode.nix
     ./programs/kitty.nix
+    ./programs/fastfetch.nix
     ./programs/plasma-manager.nix
   ];
 
@@ -12,4 +13,5 @@
   vscode-program.enable = lib.mkDefault true;
   kitty-program.enable = lib.mkDefault true;
   plasma-manager-config.enable = lib.mkDefault true;
+  fastfetch-program.enable = lib.mkDefault true;
 }
