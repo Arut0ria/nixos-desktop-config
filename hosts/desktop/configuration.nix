@@ -69,6 +69,10 @@
     vlc
     blender
     nh
+
+    tty-clock
+    cava
+    deluge
   ];
 
   /*
@@ -76,7 +80,17 @@
   */
   zramSwap = {
     enable = true;
-    writebackDevice = "/dev/disk/by_partuuid/1e0baea1-a3a8-46d8-aa33-82bbc6e78aaa";
+    writebackDevice = "/dev/disk/by-partuuid/1e0baea1-a3a8-46d8-aa33-82bbc6e78aaa";
+  };
+
+  security.polkit.enable = true;
+
+  /*
+    Bluetooth setup
+  */
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

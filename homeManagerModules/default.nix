@@ -6,6 +6,7 @@
     ./programs/kitty.nix
     ./programs/fastfetch.nix
     ./programs/plasma-manager.nix
+    ./programs/mangohud.nix
   ];
 
   firefox-program.enable = lib.mkDefault true;
@@ -14,4 +15,5 @@
   kitty-program.enable = lib.mkDefault true;
   plasma-manager-config.enable = lib.mkDefault true;
   fastfetch-program.enable = lib.mkDefault true;
+  mangohud-program.enable = lib.mkDefault true;
 }
