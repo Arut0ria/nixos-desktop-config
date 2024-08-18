@@ -2,7 +2,13 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { system ? "x86_64-linux", config, lib, pkgs, modulesPath, ... }@inputs:
-
+let
+  extraOptions = [
+    "compress=zstd"
+    "discard=async"
+    "noatime"
+  ];
+in
 {
   imports =
     [
@@ -22,7 +28,7 @@
     {
       device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" ] ++ extraOptions;
     };
 
   boot.initrd.luks.devices = {
@@ -36,28 +42,35 @@
     {
       device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=home" ] ++ extraOptions;
     };
 
   fileSystems."/nix" =
     {
       device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" ] ++ extraOptions;
     };
 
   fileSystems."/persist" =
     {
       device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
       fsType = "btrfs";
-      options = [ "subvol=persist" ];
+      options = [ "subvol=persist" ] ++ extraOptions;
     };
 
   fileSystems."/var/log" =
     {
       device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
       fsType = "btrfs";
-      options = [ "subvol=log" ];
+      options = [ "subvol=log" ] ++ extraOptions;
+    };
+
+  fileSystems."/swap" =
+    {
+      device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
+      fsType = "btrfs";
+      options = [ "subvol=log" ] ++ extraOptions;
     };
 
   fileSystems."/boot" =
@@ -66,6 +79,36 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+
+  /*
+    Shared disk definitions (dual boot)
+  */
+  fileSystems."/media/Data1" = {
+    device = "/dev/disk/by-label/Data1";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+    ];
+  };
+
+  fileSystems."/media/Data2" = {
+    device = "/dev/disk/by-label/Data2";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+    ];
+  };
+
+  fileSystems."/media/Data3" = {
+    device = "/dev/disk/by-label/Data3";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+    ];
+  };
 
   swapDevices = [ ];
 

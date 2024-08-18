@@ -27,7 +27,7 @@
       };
     });
 
-    supportedFilesystems = [ "btrfs" "vfat" ];
+    supportedFilesystems = [ "btrfs" "vfat" "ntfs" ];
     initrd.systemd.enable = true;
 
     loader = {
@@ -71,25 +71,13 @@
     nh
   ];
 
-  #DLNA
-  services.minidlna.enable = true;
-  services.minidlna.settings = {
-    friendly_name = "DLNA MEDIA";
-    media_dir = [
-      # "V,/run/media/theo/Data3/Video"
-      "PVA,/dlna"
-      # "A,/mnt/media/Songs/" #Audio files are here
-    ];
-    log_level = "error";
-    inotify = "yes";
-    wide_links = "yes";
+  /*
+    ZRAM setup
+  */
+  zramSwap = {
+    enable = true;
+    writebackDevice = "/dev/disk/by_partuuid/1e0baea1-a3a8-46d8-aa33-82bbc6e78aaa";
   };
-
-  users.users.minidlna = {
-    # isNormalUser = false;
-    extraGroups = [ "users" ]; # so minidlna can access the files.
-  };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
