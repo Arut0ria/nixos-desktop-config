@@ -9,6 +9,7 @@
 
     ./programs/stylix.nix
     ./programs/steam.nix
+    ./programs/retroarch.nix
   ];
 
   nvidia-module.enable = lib.mkDefault true;
@@ -20,4 +21,5 @@
 
   stylix-module.enable = lib.mkDefault true;
   steam-program.enable = lib.mkDefault true;
+  retroarch-program.enable = lib.mkDefault true;
 }

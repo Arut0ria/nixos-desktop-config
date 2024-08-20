@@ -73,6 +73,11 @@
     tty-clock
     cava
     deluge
+
+    vulkan-tools
+    wineWowPackages.stable
+    winetricks
+    wineWowPackages.waylandFull
   ];
 
   /*
@@ -80,7 +85,8 @@
   */
   zramSwap = {
     enable = true;
-    writebackDevice = "/dev/disk/by-partuuid/1e0baea1-a3a8-46d8-aa33-82bbc6e78aaa";
+    memoryPercent = 80;
+    # writebackDevice = "/dev/disk/by-partuuid/1e0baea1-a3a8-46d8-aa33-82bbc6e78aaa/zramswap";
   };
 
   security.polkit.enable = true;

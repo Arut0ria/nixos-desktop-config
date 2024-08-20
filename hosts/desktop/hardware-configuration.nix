@@ -66,13 +66,6 @@ in
       options = [ "subvol=log" ] ++ extraOptions;
     };
 
-  fileSystems."/swap" =
-    {
-      device = "/dev/disk/by-uuid/47f2d645-952c-4060-a1c6-0dc528fea7f8";
-      fsType = "btrfs";
-      options = [ "subvol=log" ] ++ extraOptions;
-    };
-
   fileSystems."/boot" =
     {
       device = "/dev/disk/by-uuid/E43B-B7AD";
@@ -110,7 +103,7 @@ in
     ];
   };
 
-  swapDevices = [ ];
+  swapDevices = lib.mkForce [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
