@@ -14,6 +14,7 @@
     environment.systemPackages = with pkgs; [
       protonup
       bottles
+      lutris
     ];
 
     # No need for this I think...
