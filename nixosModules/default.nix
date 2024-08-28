@@ -6,6 +6,7 @@
     ./services/ssh.nix
     ./services/locale.nix
     ./services/dlna.nix
+    ./services/virtualisation.nix
 
     ./programs/stylix.nix
     ./programs/steam.nix
@@ -17,7 +18,10 @@
   plasma-module.enable = lib.mkDefault true;
   ssh-module.enable = lib.mkDefault true;
   locale-module.enable = lib.mkDefault true;
-  dlna-module.enable = lib.mkDefault false;
+  dlna-module.enable = lib.mkDefault true;
+
+  virtualisation-service.enable = lib.mkDefault true;
+  docker-service.enable = lib.mkDefault true;
 
   stylix-module.enable = lib.mkDefault true;
   steam-program.enable = lib.mkDefault true;

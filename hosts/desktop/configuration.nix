@@ -55,7 +55,12 @@
   programs.zsh.enable = true;
   users.users.theo = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = lib.mkMerge [
+      ([ "wheel" ])
+      (lib.mkIf (config.docker-service.enable) [ "docker" ])
+      (lib.mkIf (config.virtualisation-service.enable) [ "libvirtd" ])
+    ];
+
     packages = with pkgs; [ ];
 
     shell = pkgs.zsh;
@@ -69,6 +74,8 @@
     vlc
     blender
     nh
+    p7zip
+    htop
 
     tty-clock
     cava
