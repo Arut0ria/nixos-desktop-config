@@ -17,6 +17,15 @@
         ${pkgs.fastfetch}/bin/fastfetch
       '';
 
+      oh-my-zsh = {
+        enable = true;
+        plugins = lib.mkMerge [
+          [ "git" ]
+          [ "docker" ]
+          # (lib.mkIf (config.docker-service.enable) ["docker"])
+        ];
+      };
+
       zplug = {
         enable = true;
         plugins = [
@@ -26,6 +35,11 @@
           }
         ];
       };
+
     };
+    
+    home.packages = with pkgs; [
+      nerdfonts
+    ];
   };
 }

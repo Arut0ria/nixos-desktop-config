@@ -22,6 +22,15 @@
         jnoortheen.nix-ide
         bierner.emojisense
       ];
+
+      userSettings =
+        let
+          stylix-monospace = if (config.stylix.enable) then (config.stylix.fonts.monospace.name) else ("");
+          nerd-font = "Hack Nerd Font";
+        in
+        {
+          "editor.fontFamily" = lib.mkForce "'${stylix-monospace}', '${nerd-font}'";
+        };
     };
   };
 }

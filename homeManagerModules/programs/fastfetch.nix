@@ -11,16 +11,17 @@
         "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
         logo = {
           source = pkgs.fetchurl {
-            url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo.jpg";
-            sha256 = "0bb8m5bjgm4kjdv17sgp29bfphw386xsld5kl8dm9m08mzfmadh6";
+            # url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo.jpg";
+            url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo_2.jpg";
+            sha256 = "174bvzc9qgbjizzmx7lwdv7bl2bjlc0g0r4n2psd5hakjlglalma";
           };
           # width = 64;
-          height = 16;
+          height = 20;
           # source = "/home/theo/nixos-desktop-config/images/term_logo.jpg";
           type = "kitty";
           printRemaining = false;
           padding = {
-            top = 2;
+            top = 1;
             left = 2;
           };
         };
@@ -43,7 +44,7 @@
             }
             {
               type = "title";
-              key = " ╭─ ☕";
+              key = " ╭─  ";
               keyColor = "green";
               color = {
                 user = "green";
@@ -54,24 +55,24 @@
           ++ lib.optionals pkgs.stdenv.isLinux [
             {
               type = "os";
-              key = " ├─ 🖥️";
+              key = " ├─  ";
               keyColor = "green";
             }
             {
               type = "kernel";
-              key = " ├─ 🦾";
+              key = " ├─  ";
               keyColor = "green";
             }
             {
               type = "packages";
-              key = " ├─ 💯";
+              key = " ├─ 󰏗 ";
               keyColor = "green";
             }
           ]
           ++ [
             {
               type = "shell";
-              key = " ╰─ 🐚";
+              key = " ╰─  ";
               keyColor = "green";
             }
             {
@@ -81,28 +82,28 @@
             }
             {
               type = "display";
-              key = " ╭─ 🪧";
+              key = " ╭─ 󰍹 ";
               keyColor = "blue";
               compactType = "original-with-refresh-rate";
             }
             {
               type = "cpu";
-              key = " ├─ 🚄";
+              key = " ├─  ";
               keyColor = "blue";
             }
             {
               type = "gpu";
-              key = " ├─ 🚅";
+              key = " ├─ 󰂵 ";
               keyColor = "blue";
             }
             {
               type = "disk";
-              key = " ├─ 📂";
+              key = " ├─ 󰋊 ";
               keyColor = "blue";
             }
             {
               type = "memory";
-              key = " ╰─ 📝";
+              key = " ╰─  ";
               keyColor = "blue";
             }
             {
@@ -112,17 +113,17 @@
             }
             {
               type = "wm";
-              key = " ╭─ 🫧";
+              key = " ╭─  ";
               keyColor = "yellow";
             }
             {
               type = "terminal";
-              key = " ├─ 🔳";
+              key = " ├─ 󰞷 ";
               keyColor = "yellow";
             }
             {
               type = "font";
-              key = " ╰─ 🖋️";
+              key = " ╰─  ";
               keyColor = "yellow";
             }
             {
@@ -130,7 +131,12 @@
               outputColor = "blue";
               format = ''└────────────────────────────────────────┘'';
             }
-            "colors"
+            {
+              type = "colors";
+              symbol = "circle";
+              block.width = 5;
+              paddingLeft = 2;
+            }
             # {
             #   type = "custom";
             #   format = "   {#39}   {#34}    {#36}    {#35}    {#34}    {#33}    {#32}    {#31} ";
