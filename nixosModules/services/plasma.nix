@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }@inputs: {
   options = {
     plasma-module.enable = lib.mkEnableOption "Enables plasma";
   };
@@ -13,5 +13,9 @@
 
       desktopManager.plasma6.enable = true;
     };
+
+    environment.systemPackages = lib.optionals (builtins.hasAttr "kwin-effects-forceblur" inputs.inputs) [
+      inputs.inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    ];
   };
 }
