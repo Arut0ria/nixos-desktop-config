@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, lib, ... }@inputs: {
   options = {
     plasma-manager-config.enable = lib.mkEnableOption "Enables plasma manager config.";
   };
@@ -79,6 +79,59 @@
             "org.kde.plasma.showdesktop"
           ];
         }
+
+      ];
+
+      window-rules = [
+        {
+          description = "Kitty Rule";
+          match = {
+            window-class = {
+              value = "kitty";
+              type = "substring";
+            };
+            window-types = [
+              "normal"
+            ];
+          };
+
+          apply = {
+            noborder = {
+              value = true;
+              apply = "force";
+            };
+            opacityactiverule = {
+              value = 2;
+              apply = "force";
+            };
+            opacityinactiverule = {
+              value = 2;
+              apply = "force";
+            };
+          };
+        }
+        {
+          description = "Forced Opacity";
+          match = {};
+          apply = {
+            opacityactive = {
+              value = 95;
+              apply = "force";
+            };
+            opacityactiverule = {
+              value = 2;
+              apply = "force";
+            };
+            opacityinactive = {
+              value = 85;
+              apply = "force";
+            };
+            opacityinactiverule = {
+              value = 2;
+              apply = "force";
+            };
+          };
+        }
       ];
 
       # Kwin setup
@@ -88,7 +141,8 @@
 
         effects = {
           translucency.enable = true;
-          blur.enable = true;
+          blur.enable = false;
+          # forceblur.enable = lib.optionals (builtins.hasAttr "kwin-effects-forceblur" inputs.inputs) true;
         };
 
         virtualDesktops = {
