@@ -53,10 +53,9 @@
 
   nvidia-module.enable = lib.mkForce false;
   dlna-module.enable = lib.mkForce false;
-  steam-program.enable = lib.mkForce false;
+  # steam-program.enable = lib.mkForce false;
   retroarch-program.enable = lib.mkForce false;
   virtualisation-service.enable = lib.mkForce false;
-  mangohud-program.enable = lib.mkForce false;
 
   nixpkgs.config.allowUnfree = true;
 
