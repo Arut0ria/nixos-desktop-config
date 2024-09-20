@@ -16,7 +16,7 @@
             sha256 = "174bvzc9qgbjizzmx7lwdv7bl2bjlc0g0r4n2psd5hakjlglalma";
           };
           # width = 64;
-          height = 20;
+          height = 18;
           # source = "/home/theo/nixos-desktop-config/images/term_logo.jpg";
           type = "kitty";
           printRemaining = false;
