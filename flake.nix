@@ -6,6 +6,8 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     # };
 
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +34,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
     in
     {
       nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -50,7 +53,7 @@
       nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs system;
+          inherit inputs system pkgs-unstable;
         };
 
         modules = [
