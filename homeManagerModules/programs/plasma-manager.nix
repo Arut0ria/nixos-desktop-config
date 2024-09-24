@@ -70,8 +70,8 @@
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.volume"
                 ];
-                # And explicitly hide networkmanagement and volume
                 hidden = [
+                  ""
                 ];
               };
             }

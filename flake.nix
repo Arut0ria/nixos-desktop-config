@@ -40,7 +40,7 @@
       nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs system;
+          inherit inputs system pkgs-unstable;
         };
 
         modules = [
