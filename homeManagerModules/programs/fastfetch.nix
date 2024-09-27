@@ -19,7 +19,8 @@
           height = 18;
           # source = "/home/theo/nixos-desktop-config/images/term_logo.jpg";
           type = "kitty";
-          printRemaining = false;
+          printRemaining = true;
+          preserveAspectRatio = true;
           padding = {
             top = 1;
             left = 2;

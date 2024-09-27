@@ -32,7 +32,11 @@
             {
               kickoff = {
                 sortAlphabetically = true;
-                icon = "nix-snowflake-white";
+                icon = "nix-snowflake-colours";
+                size = {
+                  width = 48;
+                  height = 48;
+                };
               };
             }
             "org.kde.plasma.pager"
@@ -72,6 +76,8 @@
                 ];
                 # And explicitly hide networkmanagement and volume
                 hidden = [
+                  "org.kde.plasma.mediacontroller"
+                  "org.kde.plasma.clipboard"
                 ];
               };
             }
@@ -112,7 +118,7 @@
         }
         {
           description = "Forced Opacity";
-          match = {};
+          match = { };
           apply = {
             opacityactive = {
               value = 95;
