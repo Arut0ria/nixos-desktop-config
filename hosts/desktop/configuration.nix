@@ -88,34 +88,32 @@
   # ];
 
   environment.systemPackages = lib.mkMerge [
-    (with pkgs; [
+    (with pkgs;
+    [
       git
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    nixpkgs-fmt
-    vlc
-    blender
-    nh
-    p7zip
-    htop
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      nixpkgs-fmt
+      vlc
+      blender
+      nh
+      p7zip
+      htop
 
-    tty-clock
-    cava
-    deluge
+      tty-clock
+      cava
+      deluge
 
-    vulkan-tools
-    wineWowPackages.stable
-    winetricks
-    wineWowPackages.waylandFull
-    ])
-    (with pkgs-unstable; [
-      plasmusic-toolbar
+      vulkan-tools
+      wineWowPackages.stable
+      winetricks
+      wineWowPackages.waylandFull
     ])
   ];
 
   /*
-    ZRAM setup
-  */
+      ZRAM setup
+    */
   zramSwap = {
     enable = true;
     memoryPercent = 80;
