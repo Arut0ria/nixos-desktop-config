@@ -1,4 +1,5 @@
-{ pkgs, config, lib, ... }: {
+{ pkgs, config, lib, ... }:
+{
   options = {
     fastfetch-program.enable = lib.mkEnableOption "Enables Fastfetch";
   };
@@ -10,15 +11,15 @@
       settings = {
         "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
         logo = {
-          source = pkgs.fetchurl {
-            # url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo.jpg";
-            url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo_2.jpg";
-            sha256 = "174bvzc9qgbjizzmx7lwdv7bl2bjlc0g0r4n2psd5hakjlglalma";
-          };
+          # source = pkgs.fetchurl {
+          #   # url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo.jpg";
+          #   url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo_2.jpg";
+          #   sha256 = "174bvzc9qgbjizzmx7lwdv7bl2bjlc0g0r4n2psd5hakjlglalma";
+          # };
           # width = 64;
           height = 18;
           # source = "/home/theo/nixos-desktop-config/images/term_logo.jpg";
-          type = "kitty";
+          type = "kitty-direct";
           printRemaining = true;
           preserveAspectRatio = true;
           padding = {

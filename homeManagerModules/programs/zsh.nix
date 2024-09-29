@@ -1,4 +1,9 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, ... }:
+let
+  get-a-gal = import ./get-a-gal.nix { inherit pkgs; };
+  pattern = "*Maid*";
+in
+{
   options = {
     zsh-program.enable = lib.mkEnableOption "Enables zsh.";
   };
@@ -14,7 +19,16 @@
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
         [ -f ./.p10k.zsh ] && source ./.p10k.zsh
-        ${pkgs.fastfetch}/bin/fastfetch
+
+        char_pixel_size=20
+        fastfetch_number_of_line=23
+
+        height=$((fastfetch_number_of_line * char_pixel_size))
+        IMAGE_PATH="$(${pkgs.python3}/bin/python ${get-a-gal}/bin/main.py --pattern "${pattern}" ${get-a-gal}/images)"
+        TEMP_IMAGE="$(mktemp)"
+        magick "$IMAGE_PATH" -resize "x$height" "$TEMP_IMAGE" \
+        && ${pkgs.fastfetch}/bin/fastfetch --kitty-direct "$TEMP_IMAGE" \
+        && rm $TEMP_IMAGE
       '';
 
       oh-my-zsh = {
@@ -37,7 +51,7 @@
       };
 
     };
-    
+
     home.packages = with pkgs; [
       nerdfonts
     ];
