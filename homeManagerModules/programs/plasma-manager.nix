@@ -4,6 +4,15 @@
   };
 
   config = lib.mkIf config.plasma-manager-config.enable {
+    nixpkgs.overlays = [
+      (final: prev: {
+        plasmusic-toolbar = (import inputs.inputs.nixpkgs-unstable { system = final.system; }).plasmusic-toolbar;
+      })
+    ];
+
+    # environment.systemPackages = with pkgs; [ plasmusic-toolbar ];
+    home.packages = with pkgs; [ plasmusic-toolbar ];
+
     programs.plasma = {
       enable = true;
 
@@ -44,29 +53,30 @@
 
             "org.kde.plasma.marginsseparator"
 
-            # {
-            #   plasmusicToolbar = {
-            #     panelIcon = {
-            #       albumCover = {
-            #         useAsIcon = false;
-            #         radius = 8;
-            #       };
-            #       icon = "view-media-track";
-            #     };
-            #     # preferredSource = "spotify";
-            #     musicControls.showPlaybackControls = true;
-            #     songText = {
-            #       displayInSeparateLines = true;
-            #       maximumWidth = 640;
-            #       scrolling = {
-            #         behavior = "alwaysScroll";
-            #         speed = 3;
-            #       };
-            #     };
-            #   };
-            # }
+            {
+              plasmusicToolbar = {
+                panelIcon = {
+                  albumCover = {
+                    useAsIcon = true;
+                    radius = 8;
+                  };
+                  icon = "view-media-track";
+                };
+                # preferredSource = "spotify";
+                musicControls.showPlaybackControls = true;
+                songText = {
+                  displayInSeparateLines = false;
+                  # maximumWidth = 640;
+                  scrolling = {
+                    behavior = "alwaysScroll";
+                    speed = 3;
+                  };
+                };
+              };
+            }
 
             # "org.kde.plasma.systemtray"
+
             {
               systemTray.items = {
                 shown = [
