@@ -21,7 +21,7 @@ in
         [ -f ./.p10k.zsh ] && source ./.p10k.zsh
 
         char_pixel_size=20
-        fastfetch_number_of_line=23
+        fastfetch_number_of_line=19
 
         height=$((fastfetch_number_of_line * char_pixel_size))
         IMAGE_PATH="$(${pkgs.python3}/bin/python ${get-a-gal}/bin/main.py --pattern "${pattern}" ${get-a-gal}/images)"

@@ -10,15 +10,15 @@ let
   #   url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/term_logo_2.jpg";
   #   sha256 = "174bvzc9qgbjizzmx7lwdv7bl2bjlc0g0r4n2psd5hakjlglalma";
   # };
-  logo = pkgs.stdenv.mkDerivation {
-    name = "sddm_logo";
-    src = "nixosModules/programs/custom_nix_logo.svg";
-    dontUnpack = true;
-    installPhase = ''
-      mkdir -p $out
-      cp custom_nix_logo.svg share/sddm/themes/breeze/theme.conf.user
-    '';
-  };
+  # logo = pkgs.stdenv.mkDerivation {
+  #   name = "sddm_logo";
+  #   src = "nixosModules/programs/custom_nix_logo.svg";
+  #   dontUnpack = true;
+  #   installPhase = ''
+  #     mkdir -p $out
+  #     cp custom_nix_logo.svg share/sddm/themes/breeze/theme.conf.user
+  #   '';
+  # };
 in
 {
   options = {
