@@ -42,6 +42,19 @@
         ];
       };
 
+      nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs system;
+        };
+
+        modules = [
+          ./hosts/laptop/configuration.nix
+          ./nixosModules
+          inputs.stylix.nixosModules.stylix
+        ];
+      };
+
       inputs.home-manager = {
         useUserPackages = true;
         useGlobalPkgs = true;
