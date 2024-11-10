@@ -23,12 +23,21 @@ in
         char_pixel_size=20
         fastfetch_number_of_line=19
 
-        height=$((fastfetch_number_of_line * char_pixel_size))
+        alias fs='height=$((fastfetch_number_of_line * char_pixel_size))
         IMAGE_PATH="$(${pkgs.python3}/bin/python ${get-a-gal}/bin/main.py --pattern "${pattern}" ${get-a-gal}/images)"
         TEMP_IMAGE="$(mktemp)"
         magick "$IMAGE_PATH" -resize "x$height" "$TEMP_IMAGE" \
         && ${pkgs.fastfetch}/bin/fastfetch --kitty-direct "$TEMP_IMAGE" \
-        && rm $TEMP_IMAGE
+        && rm $TEMP_IMAGE'
+
+        # height=$((fastfetch_number_of_line * char_pixel_size))
+        # IMAGE_PATH="$(${pkgs.python3}/bin/python ${get-a-gal}/bin/main.py --pattern "${pattern}" ${get-a-gal}/images)"
+        # TEMP_IMAGE="$(mktemp)"
+        # magick "$IMAGE_PATH" -resize "x$height" "$TEMP_IMAGE" \
+        # && ${pkgs.fastfetch}/bin/fastfetch --kitty-direct "$TEMP_IMAGE" \
+        # && rm $TEMP_IMAGE
+
+        fs # Runnings fastfetch
       '';
 
       oh-my-zsh = {
@@ -51,9 +60,5 @@ in
       };
 
     };
-
-    home.packages = with pkgs; [
-      nerdfonts
-    ];
   };
 }

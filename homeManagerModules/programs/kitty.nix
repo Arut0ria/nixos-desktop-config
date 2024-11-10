@@ -6,7 +6,7 @@
   config = lib.mkIf config.kitty-program.enable {
     programs.kitty = {
       enable = true;
-      shellIntegration.enableZshIntegration = true;
+      shellIntegration.enableZshIntegration = (lib.mkIf (config.zsh-program.enable) true);
     };
   };
 }
