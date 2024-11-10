@@ -7,17 +7,21 @@
     nixpkgs.overlays = [
       (final: prev: {
         plasmusic-toolbar = (import inputs.inputs.nixpkgs-unstable { system = final.system; }).plasmusic-toolbar;
+        polonium = (import inputs.inputs.nixpkgs-unstable { system = final.system; }).polonium;
+        # polonium = prev.libsForQt5.polonium;
       })
     ];
 
     # environment.systemPackages = with pkgs; [ plasmusic-toolbar ];
-    home.packages = with pkgs; [ plasmusic-toolbar ];
+    home.packages = with pkgs; [
+      plasmusic-toolbar
+    ];
 
     programs.plasma = {
       enable = true;
 
       # workspace = {
-      #   lookAndFeel = "";
+      #   lookAndFeel = "com.github.vinceliuice.Graphite";
       # };
 
       # Hotkeys
@@ -49,8 +53,11 @@
               };
             }
             "org.kde.plasma.pager"
-            "org.kde.plasma.icontasks"
 
+            "org.kde.plasma.marginsseparator"
+            "org.kde.plasma.panelspacer"
+            "org.kde.plasma.icontasks"
+            "org.kde.plasma.panelspacer"
             "org.kde.plasma.marginsseparator"
 
             {
@@ -167,20 +174,25 @@
 
         borderlessMaximizedWindows = true;
 
-        # scripts.polonium = {
-        #   enable = true;
-        #   settings = {
-        #     borderVisibility = "noBorderAll";
-        #     filter.windowTitles = null; # Don't filter windows by title, for now...
-        #     filter.processes = [
-        #       "krunner"
-        #       "yakuake"
-        #       "kded"
-        #       "polkit"
-        #       "plasmashell"
-        #     ];
-        #   };
-        # };
+        scripts.polonium = {
+          enable = true;
+          settings = {
+            borderVisibility = "noBorderAll";
+            filter.windowTitles = null; # Don't filter windows by title, for now...
+            filter.processes = [
+              "krunner"
+              "yakuake"
+              "kded"
+              "polkit"
+              "plasmashell"
+            ];
+          };
+        };
+      };
+
+      # Additional config
+      configFile = {
+        "kwinrc"."MouseBindings"."CommandAllWheel" = "Change opacity";
       };
     };
   };
