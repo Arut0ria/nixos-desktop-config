@@ -11,6 +11,7 @@
     ./programs/stylix.nix
     ./programs/steam.nix
     ./programs/retroarch.nix
+    ./programs/nixvim.nix
   ];
 
   nvidia-module.enable = lib.mkDefault true;
@@ -26,4 +27,6 @@
   stylix-module.enable = lib.mkDefault true;
   steam-program.enable = lib.mkDefault true;
   retroarch-program.enable = lib.mkDefault true;
+
+  nixvim-program.enable = lib.mkDefault true;
 }

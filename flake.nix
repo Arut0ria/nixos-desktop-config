@@ -28,6 +28,11 @@
       url = "github:taj-ny/kwin-effects-forceblur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim/nixos-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }:
@@ -35,32 +40,42 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+
+      configSharedModules = [
+        ./nixosModules
+
+        inputs.stylix.nixosModules.stylix
+        inputs.nixvim.nixosModules.nixvim
+      ];
+
+      configSharedArgs = {
+        inherit inputs system pkgs-unstable;
+      };
     in
     {
       nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
+        specialArgs = configSharedArgs;
+
+        # specialArgs = {
+        #   inherit inputs system pkgs-unstable;
+        # };
 
         modules = [
           ./hosts/desktop/configuration.nix
-          ./nixosModules
-          inputs.stylix.nixosModules.stylix
-        ];
+        ] ++ configSharedModules;
       };
 
       nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
+        specialArgs = configSharedArgs;
+        # specialArgs = {
+        #   inherit inputs system pkgs-unstable;
+        # };
 
         modules = [
           ./hosts/laptop/configuration.nix
-          ./nixosModules
-          inputs.stylix.nixosModules.stylix
-        ];
+        ] ++configSharedModules;
       };
 
       inputs.home-manager = {

@@ -21,6 +21,8 @@
       extensions = with pkgs.vscode-extensions; [
         jnoortheen.nix-ide
         bierner.emojisense
+        arrterian.nix-env-selector
+        ms-python.python
       ];
 
       userSettings =
