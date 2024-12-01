@@ -33,6 +33,12 @@
       url = "github:nix-community/nixvim/nixos-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland = {
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland?ref=0.45.1-b";
+      submodules = true;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }:
@@ -44,6 +50,10 @@
       configSharedModules = [
         ./nixosModules
 
+        ./config/system
+        ./config/home
+
+        inputs.home-manager.nixosModules.home-manager
         inputs.stylix.nixosModules.stylix
         inputs.nixvim.nixosModules.nixvim
       ];
@@ -55,11 +65,7 @@
     {
       nixosConfigurations.nixos-desktop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = configSharedArgs;
-
-        # specialArgs = {
-        #   inherit inputs system pkgs-unstable;
-        # };
+        specialArgs = { hostName = "nixos-desktop"; } // configSharedArgs;
 
         modules = [
           ./hosts/desktop/configuration.nix
@@ -68,14 +74,11 @@
 
       nixosConfigurations.nixos-laptop = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = configSharedArgs;
-        # specialArgs = {
-        #   inherit inputs system pkgs-unstable;
-        # };
+        specialArgs = { hostName = "nixos-laptop"; } // configSharedArgs;
 
         modules = [
           ./hosts/laptop/configuration.nix
-        ] ++configSharedModules;
+        ] ++ configSharedModules;
       };
 
       inputs.home-manager = {

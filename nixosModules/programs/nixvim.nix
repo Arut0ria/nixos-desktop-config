@@ -31,6 +31,10 @@
         telescope.enable = true;
         treesitter.enable = true;
 
+        neo-tree = {
+          enable = true;
+        };
+
         lsp = {
           enable = true;
           servers = {
