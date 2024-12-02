@@ -1,7 +1,5 @@
 { pkgs, lib, config, ... }: {
   imports = [
-    ./packages.nix
-
     ./programs/firefox.nix
     ./programs/zsh.nix
     ./programs/vscode.nix
@@ -9,9 +7,9 @@
     ./programs/fastfetch.nix
     ./programs/plasma-manager.nix
     ./programs/mangohud.nix
-  ];
 
-  homePackages.enable = lib.mkDefault true;
+    ./hyprland/hyprland.nix
+  ];
 
   firefox-program.enable = lib.mkDefault true;
   zsh-program.enable = lib.mkDefault true;
