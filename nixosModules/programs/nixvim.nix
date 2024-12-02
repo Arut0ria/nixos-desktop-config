@@ -28,8 +28,17 @@
 
         # oil.enable = true;
 
+        neo-tree = {
+          enable = true;
+          enableGitStatus = true;
+          closeIfLastWindow = true;
+        };
+
         telescope.enable = true;
         treesitter.enable = true;
+
+        cmp.enable = true;
+        cmp-nvim-lsp.enable = true;
 
         lsp = {
           enable = true;
