@@ -18,7 +18,7 @@ in
       initExtra = ''
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
-        [ -f ./.p10k.zsh ] && source ./.p10k.zsh
+        [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
 
         char_pixel_size=20
         fastfetch_number_of_line=19
@@ -26,7 +26,7 @@ in
         alias fs='height=$((fastfetch_number_of_line * char_pixel_size))
         IMAGE_PATH="$(${pkgs.python3}/bin/python ${get-a-gal}/bin/main.py --pattern "${pattern}" ${get-a-gal}/images)"
         TEMP_IMAGE="$(mktemp)"
-        magick "$IMAGE_PATH" -resize "x$height" "$TEMP_IMAGE" \
+        ${pkgs.imagemagick}/bin/magick "$IMAGE_PATH" -resize "x$height" "$TEMP_IMAGE" \
         && ${pkgs.fastfetch}/bin/fastfetch --kitty-direct "$TEMP_IMAGE" \
         && rm $TEMP_IMAGE'
 
