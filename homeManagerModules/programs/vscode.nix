@@ -32,6 +32,7 @@
         in
         {
           "editor.fontFamily" = lib.mkForce "'${stylix-monospace}', '${nerd-font}'";
+          "terminal.integrated.fontFamily" = lib.mkForce "";
         };
     };
   };
