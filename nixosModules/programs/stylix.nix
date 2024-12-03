@@ -25,8 +25,8 @@ in
     stylix-module.enable = lib.mkEnableOption "Enables stylix.";
 
     stylix-application-fontSize = lib.mkOption {
-      type = lib.types.int;
-      default = config.stylix.fonts.sizes.applications;
+      type = lib.types.ints.unsigned;
+      default = 12;
     };
   };
 
@@ -44,6 +44,7 @@ in
       autoEnable = true;
 
       fonts.sizes = {
+        # applications = lib.optional (builtins.hasAttr "stylix-application-fontSize" config) config.stylix-application-fontSize;
         applications = config.stylix-application-fontSize;
       };
 
