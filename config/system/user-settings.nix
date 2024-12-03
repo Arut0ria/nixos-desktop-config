@@ -1,10 +1,7 @@
-{ pkgs, lib, config, ... }:
-let
-  inherit (import ../variables.nix { inherit lib; }) userName;
-in
+{ pkgs, lib, config, variables, ... }:
 {
   users.users = {
-    "${userName}" = {
+    "${variables.userName}" = {
       isNormalUser = true;
       extraGroups = lib.mkMerge [
         ([ "wheel" ])
