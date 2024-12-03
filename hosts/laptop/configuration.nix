@@ -1,7 +1,6 @@
-{ system, inputs, config, lib, pkgs, pkgs-unstable, hostName, ... }:
+{ system, inputs, config, lib, pkgs, pkgs-unstable, hostName, variables, ... }:
 let
   inherit (import ../../config/system/packages.nix { inherit pkgs lib; }) packages;
-  inherit (import ../../config/variables.nix) stateVersion;
 in
 {
   imports =
@@ -22,7 +21,7 @@ in
     Misc config
   */
   security.polkit.enable = true;
-  system.stateVersion = stateVersion;
+  system.stateVersion = variables.stateVersion;
   programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
 
@@ -41,5 +40,8 @@ in
   # steam-program.enable = lib.mkForce false;
   retroarch-program.enable = lib.mkForce false;
   virtualisation-service.enable = lib.mkForce false;
+
+  # variables.options.fontSize = lib.mkForce 10;
+  stylix-application-fontSize = 10;
 }
 

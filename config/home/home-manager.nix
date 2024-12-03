@@ -1,12 +1,9 @@
-{ inputs, pkgs, lib, config, ... }:
-let
-  inherit (import ../variables.nix) userName;
-in
+{ inputs, pkgs, lib, config, variables, ... }:
 {
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs variables; };
     users = {
-      ${userName} = {
+      ${variables.userName} = {
         imports = [
           inputs.plasma-manager.homeManagerModules.plasma-manager
 

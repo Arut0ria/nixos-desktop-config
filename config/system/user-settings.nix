@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 let
-  inherit (import ../variables.nix) userName;
+  inherit (import ../variables.nix { inherit lib; }) userName;
 in
 {
   users.users = {

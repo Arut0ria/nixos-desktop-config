@@ -1,7 +1,7 @@
 { system, inputs, config, lib, pkgs, pkgs-unstable, hostName, ... }:
 let
   inherit (import ../../config/system/packages.nix { inherit pkgs lib; }) packages;
-  inherit (import ../../config/variables.nix) stateVersion;
+  inherit (import ../../config/variables.nix { inherit lib; }) stateVersion;
 in
 {
   imports =

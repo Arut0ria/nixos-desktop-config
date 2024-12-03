@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  inherit (import ../variables.nix) userName homeDir stateVersion;
+  inherit (import ../variables.nix { inherit lib; }) userName homeDir stateVersion;
   inherit (import ./packages.nix { inherit pkgs; }) packages;
 in
 {

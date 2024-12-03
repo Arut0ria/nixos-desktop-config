@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, variables, ... }:
 let
   background = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/Arut0ria/nixos-desktop-config/main/images/672183.jpg";
@@ -23,6 +23,11 @@ in
 {
   options = {
     stylix-module.enable = lib.mkEnableOption "Enables stylix.";
+
+    stylix-application-fontSize = lib.mkOption {
+      type = lib.types.int;
+      default = config.stylix.fonts.sizes.applications;
+    };
   };
 
   config = lib.mkIf config.stylix-module.enable {
@@ -37,6 +42,11 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
+
+      fonts.sizes = {
+        applications = config.stylix-application-fontSize;
+      };
+
       image = background;
 
       polarity = "dark";

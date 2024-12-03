@@ -60,6 +60,7 @@
 
       configSharedArgs = {
         inherit inputs system pkgs-unstable;
+        variables = (import ./config/variables.nix { lib = nixpkgs.lib; });
       };
     in
     {
