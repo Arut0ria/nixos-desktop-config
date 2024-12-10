@@ -1,7 +1,6 @@
-{ system, inputs, config, lib, pkgs, pkgs-unstable, hostName, ... }:
+{ system, inputs, config, lib, pkgs, pkgs-unstable, hostName, variables, ... }:
 let
   inherit (import ../../config/system/packages.nix { inherit pkgs lib; }) packages;
-  inherit (import ../../config/variables.nix { inherit lib; }) stateVersion;
 in
 {
   imports =
@@ -20,5 +19,5 @@ in
   programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
   security.polkit.enable = true;
-  system.stateVersion = stateVersion;
+  system.stateVersion = variables.stateVersion;
 }
