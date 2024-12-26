@@ -36,16 +36,17 @@
           "$mod, mouse:273, resizewindow"
           "$mod ALT, mouse:272, resizewindow"
         ];
+
         bind = [
           "$mod, T, exec, kitty"
           "$mod, F, exec, firefox"
 
           "$mod CTRL, right, workspace, +1"
           "$mod CTRL, left, workspace, -1"
-          
+
           "$mod CTRL_SHIFT, right, movetoworkspace, +1"
           "$mod CTRL_SHIFT, left, movetoworkspace, -1"
-        
+
           "$mod ALT, left, movefocus, l"
           "$mod ALT, down, movefocus, d"
           "$mod ALT, up, movefocus, u"
@@ -55,6 +56,24 @@
           "$mod ALT CTRL_ALT, down, movewindow, d"
           "$mod ALT CTRL_ALT, up, movewindow, u"
           "$mod ALT CTRL_ALT, right, movewindow, r"
+        ];
+
+        bindl = [
+          ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
+          ",XF86AudioPlay, exec, playerctl play-pause"
+          ",XF86AudioPause, exec, playerctl play-pause"
+
+          ",XF86AudioNext, exec, playerctl next"
+          ",XF86AudioPrev, exec, playerctl previous"
+
+          ",XF86MonBrightnessDown,exec,brightnessctl set 5%-"
+          ",XF86MonBrightnessUp,exec,brightnessctl set +5%"
+        ];
+
+        bindle = [
+          ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+          ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ];
       };
     };
