@@ -10,11 +10,13 @@
       blender
       nh
       p7zip
+      rar
       htop
 
       tty-clock
       cava
       deluge
+      playerctl
 
       vulkan-tools
       wineWowPackages.stable
@@ -22,6 +24,9 @@
       wineWowPackages.waylandFull
 
       ags
+      gimp
+      inkscape
+      easyeffects
     ])
   ];
 }
