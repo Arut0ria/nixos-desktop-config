@@ -175,7 +175,7 @@
         borderlessMaximizedWindows = true;
 
         scripts.polonium = {
-          enable = true;
+          enable = false;
           settings = {
             borderVisibility = "noBorderAll";
             filter.windowTitles = null; # Don't filter windows by title, for now...

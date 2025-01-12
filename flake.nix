@@ -1,6 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-24.11";
+    };
     # disko = {
     #  url = "github:nix-community/disko";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +17,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -30,7 +33,7 @@
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-24.05";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -44,8 +47,16 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+
+      pkgs = import nixpkgs
+        {
+          config.allowUnfree = true;
+        }.legacyPackages.${system};
+
+      pkgs-unstable = import nixpkgs-unstable {
+        config.allowUnfree = true;
+        localSystem = { inherit system; };
+      };
 
       configSharedModules = [
         ./nixosModules
@@ -59,7 +70,7 @@
       ];
 
       configSharedArgs = {
-        inherit inputs system pkgs-unstable;
+        inherit inputs system pkgs-unstable nixpkgs-unstable;
         variables = (import ./config/variables.nix { lib = nixpkgs.lib; });
       };
     in
