@@ -12,7 +12,20 @@
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         ms-python.python
-        angular.ng-template
+        bradlc.vscode-tailwindcss
+      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "ng-template";
+          publisher = "angular";
+          version = "19.0.3";
+          sha256 = "0bnka51qj45r504isx47zvp20761i5qk232cc069r3ws6k1xfns1";
+        }
+        {
+          name = "render-crlf";
+          publisher = "medo64";
+          version = "1.8.5";
+          sha256 = "um9nAMECwf1vO5ASG9KbFTN6fFDWAW/3HdDvhqbO3WQ=";
+        }
       ];
 
       userSettings =
@@ -23,6 +36,7 @@
         {
           "editor.fontFamily" = lib.mkForce "'${stylix-monospace}', '${nerd-font}'";
           "terminal.integrated.fontFamily" = lib.mkForce "";
+          "editor.tabSize" = 2;
         };
     };
   };

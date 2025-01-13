@@ -8,6 +8,7 @@
       nixpkgs-fmt
       vlc
       blender
+      inkscape
       nh
       p7zip
       rar
