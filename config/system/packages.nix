@@ -28,6 +28,7 @@
       gimp
       inkscape
       easyeffects
+      discord-ptb
     ])
   ];
 }

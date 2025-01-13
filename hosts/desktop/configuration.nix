@@ -16,8 +16,8 @@ in
   /**
     Misc config
   */
-  programs.zsh.enable = true;
   nixpkgs.config.allowUnfree = true;
+  programs.zsh.enable = true;
   security.polkit.enable = true;
   system.stateVersion = variables.stateVersion;
 }
