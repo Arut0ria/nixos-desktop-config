@@ -13,6 +13,7 @@
       p7zip
       rar
       htop
+      libreoffice
 
       tty-clock
       cava
