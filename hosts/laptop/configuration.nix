@@ -6,10 +6,6 @@ in
   imports =
     [
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
-
-      ../../config/home/default.nix
-      ../../config/system/default.nix
     ];
 
   /**
@@ -41,7 +37,14 @@ in
   retroarch-program.enable = lib.mkForce false;
   virtualisation-service.enable = lib.mkForce false;
 
-  # variables.options.fontSize = lib.mkForce 10;
   stylix-application-fontSize = 10;
+
+  /**
+    Home manager overrides
+  */
+  home-manager.users.${variables.userName} = {
+    plasmusic-displaycontrols = false;
+    plasmusic-maxWidth = 150;
+  };
 }
 
