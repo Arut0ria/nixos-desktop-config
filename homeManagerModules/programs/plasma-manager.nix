@@ -1,6 +1,14 @@
 { pkgs, config, lib, ... }@inputs: {
   options = {
     plasma-manager-config.enable = lib.mkEnableOption "Enables plasma manager config.";
+    plasmusic-displaycontrols = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+    };
+    plasmusic-maxWidth = lib.mkOption {
+      type = lib.types.ints.unsigned;
+      default = 640;
+    };
   };
 
   config = lib.mkIf config.plasma-manager-config.enable {
@@ -70,10 +78,10 @@
                   icon = "view-media-track";
                 };
                 # preferredSource = "spotify";
-                musicControls.showPlaybackControls = true;
+                musicControls.showPlaybackControls = config.plasmusic-displaycontrols;
                 songText = {
                   displayInSeparateLines = false;
-                  # maximumWidth = 640;
+                  maximumWidth = config.plasmusic-maxWidth;
                   scrolling = {
                     behavior = "alwaysScroll";
                     speed = 3;
@@ -174,25 +182,40 @@
 
         borderlessMaximizedWindows = true;
 
-        scripts.polonium = {
-          enable = false;
-          settings = {
-            borderVisibility = "noBorderAll";
-            filter.windowTitles = null; # Don't filter windows by title, for now...
-            filter.processes = [
-              "krunner"
-              "yakuake"
-              "kded"
-              "polkit"
-              "plasmashell"
-            ];
-          };
-        };
+        # scripts.polonium = {
+        #   enable = true;
+        #   settings = {
+        #     borderVisibility = "noBorderAll";
+        #     filter.windowTitles = null; # Don't filter windows by title, for now...
+        #     filter.processes = [
+        #       "krunner"
+        #       "yakuake"
+        #       "kded"
+        #       "polkit"
+        #       "plasmashell"
+        #     ];
+        #   };
+        # };
       };
 
       # Additional config
       configFile = {
         "kwinrc"."MouseBindings"."CommandAllWheel" = "Change opacity";
+
+        # Blur config
+        "kwinrc"."Plugins"."forceblurEnabled" = lib.optionals (builtins.hasAttr "kwin-effects-forceblur" inputs.inputs) true;
+        "kwinrc"."Effect-blurplus"."forceblurEnabled" = true;
+        "kwinrc"."Effect-blurplus"."BlurDecorations" = true;
+        "kwinrc"."Effect-blurplus"."BlurMatching" = false;
+        "kwinrc"."Effect-blurplus"."BlurMenus" = true;
+        "kwinrc"."Effect-blurplus"."BlurNonMatching" = true;
+        "kwinrc"."Effect-blurplus"."BlurStrength" = 8;
+        "kwinrc"."Effect-blurplus"."BottomCornerRadius" = 2;
+        "kwinrc"."Effect-blurplus"."DockCornerRadius" = 2;
+        "kwinrc"."Effect-blurplus"."MenuCornerRadius" = 2;
+        "kwinrc"."Effect-blurplus"."NoiseStrength" = 4;
+        "kwinrc"."Effect-blurplus"."TopCornerRadius" = 2;
+        "kwinrc"."Effect-blurplus"."WindowClasses" = "kitty\nxwaylandvideobridge";
       };
     };
   };
