@@ -42,6 +42,7 @@
       # Panel Setup
       panels = [
         {
+          screen = "all";
           location = "bottom";
           hiding = "none";
           floating = true;

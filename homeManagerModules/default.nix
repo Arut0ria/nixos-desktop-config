@@ -7,6 +7,7 @@
     ./programs/fastfetch.nix
     ./programs/plasma-manager.nix
     ./programs/mangohud.nix
+    ./programs/ranger.nix
 
     ./hyprland/hyprland.nix
   ];
@@ -18,4 +19,5 @@
   plasma-manager-config.enable = lib.mkDefault true;
   fastfetch-program.enable = lib.mkDefault true;
   mangohud-program.enable = lib.mkDefault true;
+  ranger-program.enable = lib.mkDefault true;
 }

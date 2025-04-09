@@ -13,6 +13,7 @@
         arrterian.nix-env-selector
         ms-python.python
         bradlc.vscode-tailwindcss
+        rust-lang.rust-analyzer
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "ng-template";
@@ -26,6 +27,30 @@
           version = "1.8.5";
           sha256 = "um9nAMECwf1vO5ASG9KbFTN6fFDWAW/3HdDvhqbO3WQ=";
         }
+        {
+          name = "vscode-glsllint";
+          publisher = "dtoplak";
+          version = "1.9.0";
+          sha256 = "sha256-Ic5yCR9CIaYylw0wPSL7lgSk+2f2O/pYkWKGKJNwm0g=";
+        }
+        {
+          name = "glsl-literal";
+          publisher = "boyswan";
+          version = "1.0.6";
+          sha256 = "sha256-xprVNva0UOZBiCxxhnd71L+nLbtCbYfy4v6z8x685ck=";
+        }
+        {
+          name = "shader";
+          publisher = "slevesque";
+          version = "1.1.5";
+          sha256 = "sha256-Pf37FeQMNlv74f7LMz9+CKscF6UjTZ7ZpcaZFKtX2ZM=";
+        }
+        {
+          name = "vscode-conventional-commits";
+          publisher = "vivaxy";
+          version = "1.26.0";
+          sha256 = "sha256-Lj2+rlrKm9h21zEoXwa2TeGFNKBmlQKr7MRX0zgngdg=";
+        }
       ];
 
       userSettings =
@@ -37,6 +62,7 @@
           "editor.fontFamily" = lib.mkForce "'${stylix-monospace}', '${nerd-font}'";
           "terminal.integrated.fontFamily" = lib.mkForce "";
           "editor.tabSize" = 2;
+          "glsllint.glslangValidatorPath" = "glslang";
         };
     };
   };
