@@ -12,9 +12,15 @@
         jnoortheen.nix-ide
         arrterian.nix-env-selector
         ms-python.python
-        bradlc.vscode-tailwindcss
         rust-lang.rust-analyzer
+        llvm-vs-code-extensions.vscode-clangd
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "vscode-tailwindcss";
+          publisher = "bradlc";
+          version = "0.14.21";
+          sha256 = "TRc0RAhVZuvMHqmvNnDQlj1udslvQofxYvJnv/Ftp/g=";
+        }
         {
           name = "ng-template";
           publisher = "angular";
@@ -63,6 +69,7 @@
           "terminal.integrated.fontFamily" = lib.mkForce "";
           "editor.tabSize" = 2;
           "glsllint.glslangValidatorPath" = "glslang";
+          "nix.formatterPath" = "nixpkgs-fmt";
         };
     };
   };
