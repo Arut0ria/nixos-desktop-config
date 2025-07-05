@@ -8,8 +8,10 @@
     ./programs/plasma-manager.nix
     ./programs/mangohud.nix
     ./programs/ranger.nix
+    ./programs/getagal.nix
+    ./programs/cava.nix
 
-    ./hyprland/hyprland.nix
+    ./hyprland/default.nix
   ];
 
   firefox-program.enable = lib.mkDefault true;
@@ -20,4 +22,7 @@
   fastfetch-program.enable = lib.mkDefault true;
   mangohud-program.enable = lib.mkDefault true;
   ranger-program.enable = lib.mkDefault true;
+  cava-program.enable = lib.mkDefault true;
+
+  getagal-program.enable = lib.mkDefault true;
 }
