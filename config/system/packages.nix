@@ -14,9 +14,10 @@
       rar
       htop
       libreoffice
+      tree
+      btop
 
       tty-clock
-      cava
       deluge
       playerctl
 
