@@ -127,10 +127,10 @@
           };
 
           apply = {
-            noborder = {
-              value = true;
-              apply = "force";
-            };
+            # noborder = {
+            #   value = true;
+            #   apply = "force";
+            # };
             opacityactiverule = {
               value = 2;
               apply = "force";
@@ -146,7 +146,7 @@
           match = { };
           apply = {
             opacityactive = {
-              value = 95;
+              value = 100;
               apply = "force";
             };
             opacityactiverule = {
@@ -218,6 +218,22 @@
         "kwinrc"."Effect-blurplus"."TopCornerRadius" = 2;
         "kwinrc"."Effect-blurplus"."WindowClasses" = "kitty\nxwaylandvideobridge";
       };
+    };
+
+    # Adding breeze config
+    home.file."${config.xdg.configHome}/breezerc" = {
+      text = ''
+        [Common]
+        OutlineIntensity=OutlineHigh
+
+        [Windeco Exception 0]
+        BorderSize=0
+        Enabled=true
+        ExceptionPattern=kitty
+        ExceptionType=0
+        HideTitleBar=true
+        Mask=0
+      '';
     };
   };
 }
