@@ -1,6 +1,5 @@
 {
   inputs = {
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-24.11";
     };
@@ -12,7 +11,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -38,9 +37,15 @@
     };
 
     hyprland = {
+      # type = "git";
+      url = "github:hyprwm/Hyprland";
+      # submodules = true;
+    };
+
+    getagal = {
       type = "git";
-      url = "https://github.com/hyprwm/Hyprland?ref=0.45.1-b";
-      submodules = true;
+      url = "ssh://git@github.com/Arut0ria/getagal-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -99,6 +104,7 @@
         sharedModules = [
           inputs.plasma-manager.homeManagerModules.plasma-manager
         ];
+        extraSpecialArgs = { inherit system; };
       };
 
       homeManagerModules.default = ./homeManagerModules;
