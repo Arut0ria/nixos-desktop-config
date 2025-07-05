@@ -6,6 +6,10 @@
       settings = {
         "$mod" = "SUPER";
 
+        exec-once = [ ]
+          ++ lib.optionals (config.waybar-module.enable) [ "waybar" ]
+          ++ lib.optionals (config.dunst-module.enable) [ "dunst" ];
+
         input = {
           kb_layout = "fr";
           touchpad = {

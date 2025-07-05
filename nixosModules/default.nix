@@ -31,6 +31,6 @@
   retroarch-program.enable = lib.mkDefault true;
 
   nixvim-program.enable = lib.mkDefault true;
-
   hyprland-module.enable = lib.mkDefault true;
 }
+  
